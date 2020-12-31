@@ -38,7 +38,7 @@ class BrandController extends AbstractController
         $brand = $marquesRepository->findOneBySlug($slug);
         $brands = $marquesRepository->findAll();
         if (!$brand){
-         die('nor ok');
+            $this->redirectToRoute('home');
         }
         $cars = $carsRepository->findByMarques($brand);
         return $this->render('brand/showBand.html.twig', [
