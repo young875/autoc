@@ -1,0 +1,76 @@
+.c1{
+    color: #FE980F;
+}
+.s1{
+    font-weight: bold;
+}
+.c2{
+    color: #696763;
+    font-size: 16px;
+    line-height: 25px;
+}
+.login-form form select, .signup-form form select {
+    background: #F0F0E9;
+    border: medium none;
+    color: #696763;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    height: 40px;
+    margin-bottom: 10px;
+    outline: medium none;
+    padding-left: 10px;
+    width: 100%;
+}
+.panel-title, .panel-body{
+    font-family: sans-serif;
+    font-weight: bold
+}
+.panel-body > ul > li > a:hover{
+    color: #FE980F;
+}
+.custom-file-input{
+    background-color: #c69500!important;
+}
+.car-sel > .col-sm-6{
+    margin-bottom: 15px;
+    color: #696763;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+.stg>p{
+    color: #696763;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+.fbook{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.table-auto-car{
+    background-color: #FE980F!important;
+}
+.caros{
+    background-size: cover;
+    background-position: center center;
+}
+.caros1{
+    background-size: cover;
+    background-position: center center;
+    background-image: url("../image/Volkswagen.jpg");
+}.caros2{
+    background-size: cover;
+    background-position: center center;
+    background-image: url("../image/nissan.jpg");
+}.caros3{
+    background-size: cover;
+    background-position: center center;
+    background-image: url("../image/leserwahl-1-tesla-model-3.jpg");
+}
+ .carou>h2, .carou>p{
+     color: white!important;
+     text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+ }

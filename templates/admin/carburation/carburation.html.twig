@@ -1,0 +1,83 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Géré les utilisateurs{% endblock %}
+
+{% block header %}
+    {% include 'partials/admin.header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('admin_home') }}">Administration</a>
+            </li>
+            <li class="breadcrumb-item active">Gérer les carburation</li>
+        </ol>
+        <div class="row">
+            <div class="col-12">
+                {% block flash %}
+                    {% include 'partials/flash.html.twig' %}
+                {% endblock %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Liste des carburations
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Carburation</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for carburation in carburations %}
+                                <tr>
+                                    <th scope="row">{{ loop.index }}</th>
+                                    <td>{{ carburation.carburation }}</td>
+                                    <th scope="row">
+                                        <a href="{{ path('update_carburation', {id: carburation.id}) }}" style="text-decoration: none">
+                                            <button class="btn btn-warning">
+                                                <i class="fa fa-pencil"></i> Modifier
+                                            </button>
+                                        </a>
+                                        <a href="{{ path('del_carburation', {id: carburation.id}) }}">
+                                            <button class="btn btn-danger">
+                                                <i class="fa fa-trash-o"></i> Supprimer
+                                            </button>
+                                        </a>
+
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    {% endblock %}
+
+    {% block footer %}
+    {% include 'partials/admin.footer.html.twig' %}
+{% endblock %}

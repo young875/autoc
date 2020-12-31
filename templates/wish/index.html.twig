@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block header %}
+    {% include 'partials/header.html.twig' %}
+{% endblock%}
+
+
+    {% block content %}
+
+
+        <section>
+            <div class="container">
+                <div class="row">
+                    {% include 'partials/menu.html.twig' %}
+                    <div class="col-sm-9">
+                        <div class="blog-post-area">
+                            {% if app.user %}
+                                <h2 class="title text-center" style="text-transform: none">Gérez ici vous souhaits</h2>
+                                {% block flash %}
+                                    <div style="margin-top: 7px">
+                                        {% include 'partials/flash.html.twig' %}
+                                    </div>
+
+                                {% endblock %}
+                                {% for wish in souhaits %}
+                                    <div class="col-sm-5">
+                                        <div id="similar-product" class="carousel slide" data-ride="carousel">
+
+                                            <!-- Wrapper for slides -->
+                                            <div class="carousel-inner">
+                                                {% for image in  wish.car.images %}
+                                                <div class="item {% if loop.first %}active {% endif %} view-product">
+                                                    <img src="{{ vich_uploader_asset(wish.car.images.first, 'imageFile') }}" alt=""/>
+                                                    <h3>VOIR</h3>
+                                                </div>
+                                                {% endfor %}
+
+                                            </div>
+
+                                            <!-- Controls -->
+                                            <a class="left item-control" href="#similar-product" data-slide="prev" style="position: absolute; top:50%!important;">
+                                                <i class="fa fa-angle-left"></i>
+                                            </a>
+                                            <a class="right item-control" href="#similar-product" data-slide="next" style="position: absolute; top:50%!important;">
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="product-information"><!--/product-information-->
+                                            <h2>{{ wish.car.model }} {{ wish.car.version }}</h2>
+                                            <span>
+									<span>{{ wish.car.prix | number_format(0, ' ', ' ') }} <sup>€</sup></span>
+									<label style="font-size: 22px">{{ wish.car.marques.marque }}</label>
+									<input type="hidden" >
+								</span>
+                                            <div class="row car-sel">
+                                                <div class="col-sm-6">
+                                                    <b>Marques :</b> {{ wish.car.marques.marque }}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <b>Modèle :</b> {{ wish.car.model }}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <b>Type de boîte :</b> {{ wish.car.boites.boite }}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <b>Energie :</b> {{ wish.car.carburations.carburation }}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <b>Puissance :</b> {{ wish.car.chevaux }}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <b>Nombres de portes :</b> {{ wish.car.porte }}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <b>Année :</b> {{ wish.car.annee }}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <b>Kilométrage  :</b> {{ wish.car.kilometre | number_format(0, ' ', ' ') }}
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <a href="{{ path('wish_remove', {id: wish.id, slug: wish.car.slug}) }}">
+                                                        <button class="btn btn-primary">Retirer des souhaits <i class="fa fa-trash-o"></i></button>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div><!--/product-information-->
+
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="alert alert-default">&nbsp;</div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="logo-404">
+                                    <a href="{{ path('home') }}"><img src="{{ asset('assests/images/home/logo.png') }}" alt="" /></a>
+                                </div>
+                                <div class="content-404">
+                                    <img src="{{ asset('assests/images/404/404.png') }}" class="img-responsive" alt=""  style="height: 400px"/>
+                                    <h1><b>OPPS!</b> Vous ne pouvez pas avoir une liste de souhaits sans être connecter</h1>
+                                    <p>Uh... veillez vous connecter et réesaiyer.</p>
+                                    <h2><a href="{{ path('brand') }}">Retourner aux marques</a></h2>
+                                </div>
+                                <br><br>
+                            {% endif %}
+                        </div><!--/blog-post-area-->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    {% endblock %}
+
+
+{% block footer %}
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}
+

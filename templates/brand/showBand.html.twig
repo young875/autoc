@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir la marque {{ brand.slug }}{% endblock %}
+
+{% block header %}
+    {% include 'partials/header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                {% include 'partials/menu.html.twig' %}
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">Voir la marque {{ brand.slug }}</h2>
+                        {% if cars is not empty  %}
+                            {% for car in cars %}
+                                <div class="col-sm-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <a href="{{ path('sell_car', {slug : car.slug}) }}"><img src="{{ vich_uploader_asset(car.images.first, 'imageFile') }}" alt="{{ car.slug }}" /></a>
+                                                <a href="{{ path('sell_car', {slug : car.slug}) }}"><h2>
+                                                        {% set nom = car.version ~ ' '~ car.model %}
+                                                        {{ nom[0:30] }}</h2></a>
+                                                <a href="{{ path('sell_car', {slug : car.slug}) }}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i> Voir la {{ car.marques.marque }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="logo-404">
+                                <a href="{{ path('home') }}"><img src="{{ asset('assests/images/home/logo.png') }}" alt="" /></a>
+                            </div>
+                            <div class="content-404">
+                                <img src="{{ asset('assests/images/404/404.png') }}" class="img-responsive" alt=""  style="height: 400px"/>
+                                <h1><b>OPPS!</b> Nous ne parvenons pas à trouver les véhicules de la marque {{ brand.slug }}</h1>
+                                <p>Uh... Il se pourrait que nous ne disposons pas encore de cette marque en stock.</p>
+                                <h2><a href="{{ path('brand') }}">Retourner aux marques</a></h2>
+                            </div>
+                            <br><br>
+                        {% endif %}
+                    </div><!--features_items-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+
+
+{% block footer %}
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

@@ -1,0 +1,21 @@
+vich_uploader:
+    db_driver: orm
+
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'
+
+    mappings:
+      marque_image:
+        uri_prefix: /assests/uploads/marques
+        upload_destination: '%kernel.project_dir%/public/assests/uploads/marques'
+        #namer: namer.marque_image
+      car_image:
+        uri_prefix: /assests/uploads/cars
+        upload_destination: '%kernel.project_dir%/public/assests/uploads/cars'
+        namer: Vich\UploaderBundle\Naming\OrignameNamer
+          #
+          #namer: App\Naming\Namer
+          #service: Vich\UploaderBundle\Naming\PropertyNamer
+          #options: { property: 'slug'}

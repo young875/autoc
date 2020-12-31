@@ -1,0 +1,70 @@
+<div class="col-sm-3">
+    <div class="left-sidebar">
+        <div class="brands_products"><!--brands_products-->
+            <h2>Marques</h2>
+            <div class="brands-name">
+                <ul class="nav nav-pills nav-stacked">
+                    {% for marque in marques %}
+                        <li><a href="{{ path('showBrand', {'slug': marque.slug}) }}"> {{ marque.marque }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div><!--/brands_products-->
+        {% if app.user %}
+        <h2>Mon compte</h2>
+        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+            <div class="panel panel-default">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordian" href="#commandes">
+                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                Mes commandes
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="commandes" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="{{ path('account_booking') }}">Commande(s) en cours</a></li>
+                                <li><a href="{{ path('account_booking') }}">Commande(s) livrée(s)</a></li>
+                                <li><a href="{{ path('account_booking') }}">Retour de commande(s)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordian" href="#adresse">
+                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                Mes adresses
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="adresse" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="">Ajouter une adresse</a></li>
+                                <li><a href="">Modifier une adresse</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a href="{{ path('account_password') }}">Modidier mon mot de passe</a></h4>
+                    </div>
+                </div>
+            </div><!--/category-products-->
+        </div>
+        {% endif %}
+
+
+        <div class="shipping text-center"><!--shipping-->
+            <img src="{{ asset('assests/image/autocar4sale.png') }}" alt="" class="img-responsive" />
+        </div><!--/shipping-->
+    </div>
+</div>

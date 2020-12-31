@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous{% endblock %}
+
+{% block header %}
+    {% include 'partials/header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+    <div id="contact-page" class="container">
+        <div class="bg">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="title text-center">Contactez-<strong>nous</strong></h2>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <p style="font-size: 16px; color: #696763; line-height: 25px; text-align: justify">
+                                N'hésitez pas à nous contacter pour toute question ou tout renseignement dont vous pourriez avoir besoin, à propos de nos véhicules neufs ou occasion ou de l'un des nombreux services additionnels que nous proposons. Nous nous engageons à vous répondre sous vingt-quatre heures du lundi au vendredi pendant les horaires d'ouverture des concessions.
+                                <br><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="contact-form">
+                        <h2 class="title text-center">Mes coordonnées</h2>
+                        {% block flash %}
+                            <div style="margin-top: 7px">
+                                {% include 'partials/flash.html.twig' %}
+                            </div>
+
+                        {% endblock %}
+                        {% if app.user %}
+                            {{ form_start(form , {'attr': {'class': 'contact-form row fbook', 'id' : 'main-contact-form'}}) }}
+                            <div class="form-group col-md-3">
+                                {{ form_widget(form.civility) }}
+                            </div>
+                            <div class="form-group col-md-9">
+                                {{ form_widget(form.firstname, {'attr': {'value': app.user.firstname}}) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.lastname, {'attr': {'value': app.user.lastname}}) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.email, {'attr': {'value': app.user.email}}) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.phone) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.country) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.city) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.zip) }}
+                            </div>
+                            <div class="form-group col-md-12">
+                                {{ form_widget(form.object) }}
+                            </div>
+                            <div class="form-group col-md-12">
+                                {{ form_widget(form.message) }}
+                            </div>
+                            <div class="col-md-12"><strong style="color: red">* CHAMPS OBLIGATOIRES</strong></div>
+                            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-lg btn-primary pull-right">Envoyer ma demande</button>
+                            </div>
+
+                            {{ form_end(form) }}
+                        {% else %}
+                            {{ form_start(form , {'attr': {'class': 'contact-form row', 'id' : 'main-contact-form'}}) }}
+                            <div class="form-group col-md-3">
+                                {{ form_widget(form.civility) }}
+                            </div>
+                            <div class="form-group col-md-9">
+                                {{ form_widget(form.firstname) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.lastname) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.email) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.phone) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.country) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.city) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.zip) }}
+                            </div>
+                            <div class="form-group col-md-12">
+                                {{ form_widget(form.object) }}
+                            </div>
+                            <div class="form-group col-md-12">
+                                {{ form_widget(form.message) }}
+                            </div>
+                            <div class="col-md-12"><strong style="color: red">* CHAMPS OBLIGATOIRES</strong></div>
+                            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-lg btn-primary pull-right">Envoyer ma demande</button>
+                            </div>
+
+                            {{ form_end(form) }}
+                        {% endif %}
+
+
+
+
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="contact-info">
+                        <h2 class="title text-center">Nos coordonnées</h2>
+                        <address>
+                            <p>Auto Car For sale Automobiles.</p>
+                            <p>Rue Pepin 2-28, 5000 Namur, Belgique </p>
+                            <p>Namur, Belgique</p>
+                            <p>Tel: +1 458 228 7045</p>
+                            <p>Tel: +3 375 598 1721</p>
+                            <p>Email: info@autocar4sale.com</p>
+                        </address>
+                        <div class="social-networks">
+                            <h2 class="title text-center">Média Social</h2>
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-youtube"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/#contact-page-->
+{% endblock %}
+
+
+
+{% block footer %}
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

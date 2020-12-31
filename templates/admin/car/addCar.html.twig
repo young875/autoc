@@ -1,0 +1,128 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+{% endblock %}
+
+{%  form_theme form _self %}
+{% block header %}
+    {% include 'partials/admin.header.html.twig' %}
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Admin</a>
+                </li>
+                <li class="breadcrumb-item active">Ajouter une voiture</li>
+            </ol>
+            {% block flash %}
+                {% include 'partials/flash.html.twig' %}
+            {% endblock %}
+
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-3">{{ form_row(form.marques) }}</div>
+                <div class="col-md-3">{{ form_row(form.etats) }}</div>
+                <div class="col-md-3">{{ form_row(form.couleurs) }}</div>
+                <div class="col-md-3">{{ form_row(form.boites) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">{{ form_row(form.model) }}</div>
+                <div class="col-md-6">{{ form_row(form.version) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">{{ form_row(form.carburations) }}</div>
+                <div class="col-md-2">{{ form_row(form.chevaux) }}</div>
+                <div class="col-md-2">{{ form_row(form.kilometre) }}</div>
+                <div class="col-md-2">{{ form_row(form.annee) }}</div>
+                <div class="col-md-2">{{ form_row(form.porte) }}</div>
+                <div class="col-md-2">{{ form_row(form.prix) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.description) }}</div>
+            </div>
+            {{ form_row(form.images) }}
+
+
+            <button class="btn btn-success col-12" type="submit" >Enrégistrer la voiture</button>
+            <br> <br>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block _car_images_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _car_images_entry_widget %}
+    <div class="form-group" id="block_{{ id }}">
+        <div class="row">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col">{{ form_widget(form.imageFile) }}</div>
+                </div>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-danger" data-action="delete" data-target="#block_{{ id }}" type="button">X</button>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block _car_images_widget %}
+
+    <p>Ajouter des images</p>
+    {{ form_widget(form) }}
+
+    <input type="hidden" id="counter" value="0">
+
+    <div class="form-group">
+        <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $('#add-image').click(function()  {
+            const  index = +$("#counter").val();
+            const tmpl = $('#car_images').data('prototype').replace(/__name__/g, index);
+            $('#car_images').append(tmpl);
+            $('#counter').val(index +1);
+
+            handleDeleteButtons();
+
+        });
+
+        function handleDeleteButtons() {
+            $('button[data-action="delete"]').click(function () {
+                const target = this.dataset.target;
+                $(target).remove();
+            });
+        }
+        handleDeleteButtons();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+    <script>
+        $('#car_description').summernote({
+            placeholder: 'description suplémantaire de l\'article ',
+            tabsize: 4,
+            height: 200
+        });
+    </script>
+
+{% endblock %}

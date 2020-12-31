@@ -1,0 +1,96 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Voir les voitures{% endblock %}
+
+{% block header %}
+    {% include 'partials/admin.header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('admin_home') }}">Administration</a>
+            </li>
+            <li class="breadcrumb-item active">Voir les voitures</li>
+        </ol>
+        <div class="row">
+            <div class="col-12">
+                {% block flash %}
+                    {% include 'partials/flash.html.twig' %}
+                {% endblock %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Liste des voitures
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Marque</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">Etat</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for car in cars %}
+                                <tr>
+                                    <th scope="row">{{ loop.index }}</th>
+                                    <td><img src="{{ vich_uploader_asset(car.images.first, 'imageFile') }}" alt="{{ car.slug }}" style="height: 50px"></td>
+                                    <th scope="row">{{ car.marques.marque }}</th>
+                                    <th scope="row">{{ car.model }}</th>
+                                    <th scope="row">{{ car.etats.etat }}</th>
+                                    <th scope="row">
+                                        {% if car.publie == 0  %}
+                                            <a href="{{ path('send_car', {'id': car.id}) }}"> <button class="btn btn-warning"><i class="fa fa-upload"> </i> publier</button></a>
+                                        {% else %}
+                                            <a href="{{ path('remove_car', {'id': car.id}) }}"> <button class="btn btn-warning"><i class="fa fa-crop"> </i> retirer</button></a>
+                                        {% endif %}</th>
+                                    <th scope="row">
+                                        <a href="{{ path('update_brand', {id: car.id}) }}" style="text-decoration: none">
+                                            <button class="btn btn-warning">
+                                                <i class="fa fa-pencil"></i> Modifier
+                                            </button>
+                                        </a>
+                                        <a href="{{ path('del_brand', {id: car.id}) }}">
+                                            <button class="btn btn-danger">
+                                                <i class="fa fa-trash-o"></i> Supprimer
+                                            </button>
+                                        </a>
+
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    {% endblock %}
+
+    {% block footer %}
+    {% include 'partials/admin.footer.html.twig' %}
+{% endblock %}

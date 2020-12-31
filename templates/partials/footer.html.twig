@@ -1,0 +1,144 @@
+<footer id="footer" style="margin-top: 70px!important;"><!--Footer-->
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="companyinfo">
+                        <h2 style="text-transform: none">AutoCar<span>4</span>sale</h2>
+                        <p>Contactez-nous par mail : AutoCarForSale s’engage à vous répondre sous 24h du lundi au samedi hors week-ends et jours fériés.</p>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="col-sm-3">
+                        <div class="video-gallery text-center">
+                            <a href="{{ path('showBrand', {slug : marques[0].slug}) }}">
+                                <div class="iframe-img">
+                                    <img src="{{ vich_uploader_asset(marques[0], 'imageFile') }}" alt="" />
+                                </div>
+                                <div class="overlay-icon">
+                                    <i class="fa fa-eye"></i>
+                                </div>
+                            </a>
+                            <p>{{ marques[0].marque }}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="video-gallery text-center">
+                            <a href="{{ path('showBrand', {slug : marques[1].slug}) }}">
+                                <div class="iframe-img">
+                                    <img src="{{ vich_uploader_asset(marques[1], 'imageFile') }}" alt="" />
+                                </div>
+                                <div class="overlay-icon">
+                                    <i class="fa fa-eye"></i>
+                                </div>
+                            </a>
+                            <p>{{ marques[1].marque }}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="video-gallery text-center">
+                            <a href="{{ path('showBrand', {slug : marques[2].slug}) }}">
+                                <div class="iframe-img">
+                                    <img src="{{ vich_uploader_asset(marques[2], 'imageFile') }}" alt="" />
+                                </div>
+                                <div class="overlay-icon">
+                                    <i class="fa fa-eye"></i>
+                                </div>
+                            </a>
+                            <p>{{ marques[2].marque }}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="video-gallery text-center">
+                            <a href="{{ path('showBrand', {slug : marques[3].slug}) }}">
+                                <div class="iframe-img">
+                                    <img src="{{ vich_uploader_asset(marques[3], 'imageFile') }}" alt="" />
+                                </div>
+                                <div class="overlay-icon">
+                                    <i class="fa fa-eye"></i>
+                                </div>
+                            </a>
+                            <p>{{ marques[3].marque }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="address">
+                        <img src="{{ asset('assests/images/home/map.png') }}" alt="" />
+                        <p>Rue Pepin 2-28, 5000 Namur, Belgique</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-widget">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Services</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="">Nos voitures</a></li>
+                            <li><a href="">Nos marques</a></li>
+                            <li><a href="{{ path('app_login') }}">Ma commande</a></li>
+                            <li><a href="{{ path('contact') }}">FAQ’s</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Mentions légales</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="{{ path('mentions') }}">Mentions légales</a></li>
+                            <li><a href="{{ path('confidentialite') }}">Engagement de confidentialité</a></li>
+                            <li><a href="{{ path('confidentialite') }}">Crédits</a></li>
+                            <li><a href="{{ path('mentions') }}">Réclamation</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Obtenir de l'aide</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="{{ path('contact') }}">Service Clients</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="single-widget">
+                        <h2>Mon profil</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            {% if app.user %}
+                                <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                            {% else %}
+                                <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                                <li><a href="{{ path('register') }}">S'inscrir</a></li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="single-widget">
+                        <h2>Logo slogant</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="{{ path('app_login') }}">Se connecter</a></li>
+                            <li><a href="{{ path('register') }}">S'inscrir</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <p class="pull-left">Copyright © 2018 AutoCarForSale. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+</footer>

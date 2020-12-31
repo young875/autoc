@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir les marques de vehicules disponibles{% endblock %}
+
+{% block header %}
+    {% include 'partials/header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                {% include 'partials/menu.html.twig' %}
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">Nos Marques</h2>
+                        {% for brand in brands %}
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <a href="{{ path('showBrand', {slug: brand.slug}) }}"><img src="{{ vich_uploader_asset(brand, 'imageFile') }}" alt="{{ brand.marque }}" /></a>
+                                            <a href="{{ path('showBrand', {slug: brand.slug}) }}"><h2>{{ brand.marque }}</h2></a>
+                                            <a href="{{ path('showBrand', {slug: brand.slug}) }}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i> Voir nos {{ brand.marque }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div><!--features_items-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+
+
+{% block footer %}
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

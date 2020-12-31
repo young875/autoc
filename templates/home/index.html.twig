@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block header %}
+    {% include 'partials/header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+
+    <section id="slider"><!--slider-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#slider-carousel" data-slide-to="0" class=""></li>
+                            <li data-target="#slider-carousel" data-slide-to="1" class=""></li>
+                            <li data-target="#slider-carousel" data-slide-to="2" class="active"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+
+                            <div class="item active caros1">
+                                <div class="row">
+                                    <div class="col-sm-6 carou">
+                                        <h1>AutoCar<span>4</span>sale</h1>
+                                        <h2>Éssayez, réservez achetez</h2>
+                                        <p>Sérénité, tranquillité : tous nos véhicules d’occasion sont révisés et disposent d’une garantie jusqu’à 36 mois, quelle que soit la marque. </p>
+                                        <a href="{{ path('brand') }}"><button type="button" class="btn btn-default get">voir nos véhicules</button></a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img src="{{ asset('assests/image/autocar4sale.png') }}" class="girl img-responsive" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="item caros2">
+                                <div class="row">
+                                    <div class="col-sm-6 carou">
+                                        <h1>AutoCar<span>4</span>sale</h1>
+                                        <h2>Des véhicules neufs ou d'occasion</h2>
+                                        <p>Puisque choisir son véhicule n’est pas toujours facile, nous le recherchons pour vous sans frais supplémentaires ! </p>
+                                        <a href="{{ path('brand') }}"><button type="button" class="btn btn-default get">voir nos véhicules</button></a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img src="{{ asset('assests/image/autocar4sale.png') }}" class="girl img-responsive" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="item caros3">
+                                <div class="row">
+                                    <div class="col-sm-6 carou">
+                                        <h1>AutoCar<span>4</span>sale</h1>
+                                        <h2>Véhicules toutes marques et tous budgets !</h2>
+                                        <p>Avec un stock de plus de 700 véhicules toutes marques, disponible immédiatement, trouvez l’occasion qui s’adapte le mieux à votre budget. </p>
+                                        <a href="{{ path('brand') }}"><button type="button" class="btn btn-default get">voir nos véhicules</button></a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img src="{{ asset('assests/image/autocar4sale.png') }}" class="girl img-responsive" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                {% include 'partials/menu.html.twig' %}
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">nos sélections</h2>
+                        {% for car in cars %}
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <a href="{{ path('sell_car', {slug : car.slug}) }}"><img src="{{ vich_uploader_asset(car.images.first, 'imageFile') }}" alt="{{ car.slug }}" /></a>
+                                            <a href="{{ path('sell_car', {slug : car.slug}) }}"><h2>
+                                                    {% set nom = car.version ~ ' '~ car.model %}
+                                                    {{ nom[0:30] }}</h2></a>
+                                            <a href="{{ path('sell_car', {slug : car.slug}) }}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i> Voir la {{ car.marques.marque }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">Nos Marques</h2>
+                        {% for brand in marques %}
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <a href="{{ path('showBrand', {slug: brand.slug}) }}"><img src="{{ vich_uploader_asset(brand, 'imageFile') }}" alt="{{ brand.marque }}" /></a>
+                                            <a href="{{ path('showBrand', {slug: brand.slug}) }}"><h2>{{ brand.marque }}</h2></a>
+                                            <a href="{{ path('showBrand', {slug: brand.slug}) }}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i> Voir nos {{ brand.marque }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">AutoCar4Sale</h2>
+                        <div class="row text-center ">
+                            <div class="col-sm-2 stg">
+                                <img src="{{ asset('assests/image/svg/achat.png') }}" alt="">
+                                <p>Achat/financement<br> <strong>100% en ligne</strong><br> ou en concession</p>
+                            </div>
+                            <div class="col-sm-3 stg">
+                                <img src="{{ asset('assests/image/svg/livraison.png') }}" alt="">
+                                <p>Livraison <strong>à domicile</strong><br> ou en concession</p>
+                            </div>
+                            <div class="col-sm-3 stg">
+                                <img src="{{ asset('assests/image/svg/remb.png') }}" alt="">
+                                <p><strong>Satisfait</strong> ou remboursé</p>
+                            </div>
+                            <div class="col-sm-2 stg">
+                                <img src="{{ asset('assests/image/svg/assistance.png') }}" alt="">
+                                <p><strong>1 équipe dédiée</strong><br> pour vous<br> accompagner</p>
+                            </div>
+                            <div class="col-sm-2 stg">
+                                <img src="{{ asset('assests/image/svg/vendue.png') }}" alt="">
+                                <p>1 voiture vendue <strong><br>toutes les 10 minutes</strong></p>
+                            </div>
+                        </div>
+                    </div><!--features_items-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

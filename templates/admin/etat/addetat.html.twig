@@ -1,0 +1,39 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block header %}
+    {% include 'partials/admin.header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('admin_home') }}">Administration</a>
+            </li>
+            <li class="breadcrumb-item active">Ajouter un état</li>
+        </ol>
+        <div class="row">
+            <div class="col-12">
+                {% block flash %}
+                    {% include 'partials/flash.html.twig' %}
+                {% endblock %}
+                {{ form_start(form) }}
+                    {{ form_label(form.etat) }}
+                    {{ form_widget(form.etat) }}
+                <button type="submit" class="mt-2 btn btn-primary">Créer le nouvel état</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    {% endblock %}
+
+    {% block footer %}
+    {% include 'partials/admin.footer.html.twig' %}
+{% endblock %}

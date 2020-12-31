@@ -1,0 +1,79 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Géré les couleurs{% endblock %}
+
+{% block header %}
+    {% include 'partials/admin.header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('admin_home') }}">Administration</a>
+            </li>
+            <li class="breadcrumb-item active">Gérer les couleurs</li>
+        </ol>
+        <div class="row">
+            <div class="col-12">
+                {% block flash %}
+                    {% include 'partials/flash.html.twig' %}
+                {% endblock %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Liste des couleurs
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">reservarions</th>
+                                <th scope="col">email</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for booking in bookings %}
+                                <tr>
+                                    <th scope="row">{{ loop.index }}</th>
+                                    <td>{{ booking.demande }}</td>
+                                    <td>{{ booking.email }}</td>
+                                    <th scope="row">
+                                        <a href="{{ path('show_booking', {id : booking.id} ) }}" style="text-decoration: none">
+                                            <button class="btn btn-warning">
+                                                <i class="fa fa-eye"></i> Voir
+                                            </button>
+                                        </a>
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    {% endblock %}
+
+    {% block footer %}
+    {% include 'partials/admin.footer.html.twig' %}
+{% endblock %}

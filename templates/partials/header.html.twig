@@ -1,0 +1,123 @@
+<header id="header"><!--header-->
+    <div class="header_top"><!--header_top-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="contactinfo">
+                        <ul class="nav nav-pills">
+                            <li><a href=""><i class="fa fa-phone"></i> +1 458 228 7045</a></li>
+                            <li><a href=""><i class="fa fa-envelope"></i> info@autocar4sale.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <!--<div class="social-icons pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                            <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                            <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href=""><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div><!--/header_top-->
+
+    <div class="header-middle"><!--header-middle-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="logo pull-left">
+                        <a href="{{ path('home') }}"><img src="{{ asset('assests/image/autocar4sale-logo.png') }}" alt="" style="height: 39px;" /></a>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <!--<div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+                                USA
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="">Canada</a></li>
+                                <li><a href="">UK</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+                                DOLLAR
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="">Canadian Dollar</a></li>
+                                <li><a href="">Pound</a></li>
+                            </ul>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav">
+                            {% if app.user %}
+                                <li><a href="{{ path('account') }}" class="{% if  page is defined and page == 'account' %} active{% endif %}"><i class="fa fa-user"></i> Mon compte</a></li>
+                                <li><a href="{{ path('wish_liste') }}" class="{% if  page is defined and page == 'wish' %} active{% endif %}"><i class="fa fa-star"></i> Liste de souhaits</a></li>
+
+                                <li><a href="{{ path('app_logout') }}" ><i class="fa fa-lock"></i> se déconnecter</a></li>
+                            {% else %}
+                                <li><a href="{{ path('register') }}" class="{% if  page is defined and page == 'signin' %} active{% endif %}"><i class="fa fa-user"></i> Inscription</a></li>
+                                <li><a href="{{ path('wish_liste') }}" class="{% if  page is defined and page == 'account' %} active{% endif %}"><i class="fa fa-star"></i> Liste de souhaits</a></li>
+
+                                <li><a href="{{ path('app_login') }}" class="{% if  page is defined and page == 'login' %} active{% endif %}"><i class="fa fa-lock"></i> se connecter</a></li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-middle-->
+
+    <div class="header-bottom"><!--header-bottom-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="mainmenu pull-left">
+                        <ul class="nav navbar-nav collapse navbar-collapse">
+                            <li><a href="{{ path('home') }}"  class="{% if  page is defined and page == 'home' %} active{% endif %}">Accueil</a></li>
+                            <li class="dropdown"><a href="{{ path('brand') }}"  class="{% if  page is defined and page == 'brand' %} active{% endif %}">Marques<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{{ path('brand') }}"  class="{% if  page is defined and page == 'brand' %} active{% endif %}">Nos marques</a></li>
+                                    {% for marque in marques %}
+                                        <li><a href="{{ path('showBrand', {'slug': marque.slug}) }}">{{ marque.marque | capitalize }}</a></li>
+                                    {% endfor %}
+
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#">Boutique<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{{ path('account_booking') }}">Mes réservations</a></li>
+                                    <li><a href="{{ path('wish_liste') }}">Liste des souhaits</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ path('contact') }} " class="{% if  page is defined and page == 'contacts' %} active{% endif %}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="search_box pull-right">
+                        <input type="text" placeholder="Chercher"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-bottom-->
+</header>

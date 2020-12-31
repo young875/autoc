@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block header %}
+    {% include 'partials/header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+
+
+    <section id="form" style="margin-top: 18px!important;"><!--form-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="login-form"><!--login form-->
+                        <p style="color: red">
+                            Durant la période de confinement, la livraison à domicile est assurée. Toutefois, les livraisons ne sont disponibles que sur les articles en stock et les délais peuvent varier en fonctions des transporteurs. Nous nous excusons pour la gène occasionnée et vous remercions de votre compréhension.
+                        </p>
+                        <h2>INSCRIPTION</h2>
+                        {{ form_start(form , {'attr': {'class': 'contact-form row', 'id' : 'main-contact-form'}}) }}
+                            <div class="form-group col-md-3">
+                                {{ form_widget(form.civility) }}
+                            </div>
+                            <div class="form-group col-md-9">
+                                {{ form_widget(form.firstname) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.lastname) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.email) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.password.first) }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form_widget(form.password.second) }}
+                            </div>
+                            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-lg btn-primary pull-right">S'inscrire</button>
+                            </div>
+                        {{ form_end(form) }}
+
+                    </div><!--/login form-->
+                </div>
+                <div class="col-sm-8 col-sm-offset-2 c2">
+                    <p>
+                        <i>
+                            Les informations que vous complétez en remplissant ce formulaire sont utilisées pour répondre à votre demande et pendant toute la relation commerciale.
+                            <br><br>
+                            Vous disposez d'un droit d'accès, de rectification et d'opposition aux données vous concernant, que vous pouvez exercer en contactant la société Auto Car For sale Automobiles  : secure@autocar4sale.com
+                            <br><br>
+                            Pour plus d'information, vous pouvez aussi vous référer à notre <a href="" class="c1">politique de confidentialité</a>.
+                        </i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section><!--/form-->
+
+
+{% endblock %}
+
+
+
+{% block footer %}
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

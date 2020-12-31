@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir mes réservations{% endblock %}
+
+{% block header %}
+    {% include 'partials/header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                {% include 'partials/menu.html.twig' %}
+
+                <div class="col-sm-9 padding-right">
+                    <div class="product-details"><!--product-details-->
+                        <table class="table table-striped ">
+                            <thead>
+                            <tr class="table-auto-car">
+                                <th scope="col">#</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Marque</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">Info (demande)</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for booking in bookings %}
+                            <tr>
+                                <th scope="row">{{ loop.index }}</th>
+                                <td><img src="{{ vich_uploader_asset(booking.car.images.first, 'imageFile') }}" alt="" class="img-responsive" style="height: 90px"></td>
+                                <td>{{ booking.car.marques.marque }}</td>
+                                <td>{{ booking.car.model }}</td>
+                                <td>{{ booking.demande }}</td>
+                                <td>
+                                    {% if booking.statut == 'En cours de création' %}
+                                        <div class="alert alert-warning">
+                                            {{ booking.statut }}
+                                            <i class="fa fa-cog fa-spin fa-2x fa-fw"></i>
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    {% elseif booking.statut == 'En cours de traitement' %}
+                                        <div class="alert alert-info">
+                                            {{ booking.statut }}
+                                            <i class="fa fa-user-plus"></i>
+                                        </div>
+                                    {% elseif booking.statut == 'Demande traiter et fermer' %}
+                                        <div class="alert alert-success">
+                                            {{ booking.statut }}
+                                            <i class="fa fa-send"></i>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div><!--/product-details-->
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+
+
+{% block footer %}
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

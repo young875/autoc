@@ -1,0 +1,84 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Géré les utilisateurs{% endblock %}
+
+{% block header %}
+    {% include 'partials/admin.header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('admin_home') }}">Administration</a>
+            </li>
+            <li class="breadcrumb-item active">Les comptes</li>
+        </ol>
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Liste des comptes
+                    </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Civilité</th>
+                            <th scope="col">Rôle</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Pénom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Mot de passe</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ user.civility }}</td>
+                            <td>
+                                {% for role in user.roles %}
+                                    {% if role == 'ROLE_ADMIN' %}
+                                        Administrateur
+                                    {% else %}
+                                        Utilisateur
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>{{ user.lastname }}</td>
+                            <td>{{ user.firstname }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.pass }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    {% endblock %}
+
+    {% block footer %}
+    {% include 'partials/admin.footer.html.twig' %}
+{% endblock %}

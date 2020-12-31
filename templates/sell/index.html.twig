@@ -1,0 +1,238 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir {{ car.slug }}{% endblock %}
+
+{% block header %}
+    {% include 'partials/header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                {% include 'partials/menu.html.twig' %}
+
+                <div class="col-sm-9 padding-right">
+                    <div class="product-details"><!--product-details-->
+                        <div class="col-sm-5">
+                            <div class="view-product">
+                                <img src="{{ vich_uploader_asset(car.images.first, 'imageFile') }}" alt="" />
+                                <h3>VOIR</h3>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="product-information"><!--/product-information-->
+                                <h2>{{ car.model }} {{ car.version }}</h2>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>Ref.: {{ ref }}</p>
+                                    </div>
+                                    <div class="col-sm-6 text-center" style="display: inline-block">
+                                        {% if app.user %}
+                                            {% if existe and existe == 'ok'%}
+                                                <a href="{{ path('wish_liste') }}">
+                                                    <button class="btn btn-primary">Accéder aux souhaits <i class="fa fa-star"></i></button>
+                                                </a>
+                                            {% else %}
+                                                <a href="{{ path('wish_car', {slug : car.slug}) }}">
+                                                    <button class="btn btn-primary">Ajouter aux souhaits <i class="fa fa-star"></i></button>
+                                                </a>
+                                            {% endif %}
+                                        {% endif%}
+                                    </div>
+                                </div>
+                                <span>
+									<span>{{ car.prix | number_format(0, ' ', ' ') }} <sup>€</sup></span>
+									<label style="font-size: 22px">{{ car.marques.marque }}</label>
+									<input type="hidden" >
+								</span>
+                                <div class="row car-sel">
+                                    <div class="col-sm-6">
+                                        <b>Marques :</b> {{ car.marques.marque }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <b>Modèle :</b> {{ car.model }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <b>Type de boîte :</b> {{ car.boites.boite }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <b>Energie :</b> {{ car.carburations.carburation }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <b>Puissance :</b> {{ car.chevaux }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <b>Nombres de portes :</b> {{ car.porte }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <b>Année :</b> {{ car.annee }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <b>Kilométrage  :</b> {{ car.kilometre | number_format(0, ' ', ' ') }}
+                                    </div>
+                                </div>
+
+                            </div><!--/product-information-->
+
+                        </div>
+                    </div><!--/product-details-->
+
+                    <div class="category-tab shop-details-tab"><!--category-tab-->
+                        <div class="row " style="margin-top: 5px!important; margin-bottom: 5px!important;">
+                            {% for image in car.images %}
+                                <div class="col-sm-1">
+                                    <a href=""><img src="{{ vich_uploader_asset(image) }}" alt="" style="height: 50px"></a>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#details" data-toggle="tab">Plus de Détails</a></li>
+                                <li class="active"><a href="#companyprofile" data-toggle="tab">Réserver</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" id="details" >
+                                {{ car.description | raw }}
+                            </div>
+
+                            <div class="tab-pane fade  active in" id="companyprofile" >
+                                {% block flash %}
+                                    <div style="margin-top: 7px">
+                                        {% include 'partials/flash.html.twig' %}
+                                    </div>
+
+                                {% endblock %}
+                                <p style="color: red; margin-right: 20px; margin-left: 20px">
+                                    Durant la période de confinement, la livraison à domicile est assurée. Toutefois, les livraisons ne sont disponibles que sur les articles en stock et les délais peuvent varier en fonctions des transporteurs. Nous nous excusons pour la gène occasionnée et vous remercions de votre compréhension.
+                                </p>
+                                {% if app.user %}
+                                    {{ form_start(form , {'attr': {'class': 'contact-form row fbook', 'id' : 'main-contact-form'}}) }}
+                                    <div class="form-group col-md-3">
+                                        {{ form_widget(form.civility, {'attr': {'value': app.user.civility, 'disabled': 'disabled'}}) }}
+                                    </div>
+                                    <div class="form-group col-md-5">
+                                        {{ form_widget(form.email, {'attr': {'value': app.user.email, 'disabled': 'disabled'}}) }}
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        {{ form_widget(form.phone) }}
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        {{ form_widget(form.city) }}
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        {{ form_widget(form.country) }}
+                                    </div>
+                                    <div class="form-group col-md-5">
+                                        {{ form_widget(form.address) }}
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        {{ form_widget(form.firstname, {'attr': {'value': app.user.firstname, 'disabled': 'disabled'}}) }}
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        {{ form_widget(form.lastname, {'attr': {'value': app.user.lastname, 'disabled': 'disabled'}}) }}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        {{ form_widget(form.demande) }}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        {{ form_widget(form.message) }}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <button type="submit" class="btn btn-lg btn-primary pull-right">Contacter la concession</button>
+                                    </div>
+                                    {{ form_end(form) }}
+                                {% else %}
+                                    {{ form_start(form , {'attr': {'class': 'contact-form row fbook', 'id' : 'main-contact-form'}}) }}
+                                    <div class="form-group col-md-3">
+                                        {{ form_widget(form.civility) }}
+                                    </div>
+                                    <div class="form-group col-md-5">
+                                        {{ form_widget(form.email) }}
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        {{ form_widget(form.phone) }}
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        {{ form_widget(form.city) }}
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        {{ form_widget(form.country) }}
+                                    </div>
+                                    <div class="form-group col-md-5">
+                                        {{ form_widget(form.address) }}
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        {{ form_widget(form.firstname) }}
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        {{ form_widget(form.lastname) }}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        {{ form_widget(form.demande) }}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        {{ form_widget(form.message) }}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <button type="submit" class="btn btn-lg btn-primary pull-right">Contacter la concession</button>
+                                    </div>
+                                    {{ form_end(form) }}
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+                    </div><!--/category-tab-->
+
+                    <div class="recommended_items"><!--recommended_items-->
+                        <h2 class="title text-center">recommender pour vous</h2>
+
+                        <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+
+                                <div class="item active">
+                                    {% for recommende in recommended %}
+                                        <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <a href="{{ path('sell_car', {'slug': recommende.slug }) }}">
+                                                        <img src="{{ vich_uploader_asset(recommende.images.first, 'imageFile') }}" alt="" /></a>
+                                                    <a href="{{ path('sell_car', {'slug': recommende.slug }) }}"><h2>{{ recommende.prix | number_format(0, ' ', ' ') }}€ </h2></a>
+                                                    <a href="{{ path('sell_car', {'slug': recommende.slug }) }}"><p>{{ recommende.version }}</p></a>
+                                                    <a href="{{ path('sell_car', {'slug': recommende.slug }) }}">
+                                                    <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i>Voir</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div><!--/recommended_items-->
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+
+
+{% block footer %}
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

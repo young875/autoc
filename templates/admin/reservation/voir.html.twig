@@ -1,0 +1,108 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Géré les couleurs{% endblock %}
+
+{% block header %}
+    {% include 'partials/admin.header.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('admin_home') }}">Administration</a>
+            </li>
+            <li class="breadcrumb-item active">Gérer les demandes</li>
+        </ol>
+        <div class="row">
+            <div class="col-12">
+                {% block flash %}
+                    {% include 'partials/flash.html.twig' %}
+                {% endblock %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> <strong>Objet</strong> {{ booking.demande }} -  {{ booking.car.model }} - {{ booking.car.version }}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="{{ vich_uploader_asset(booking.car.images.first, 'imageFile') }}" alt="" class="img-fluid">
+                                <br> <br>
+                                <a href="{{ path('sell_car', {slug : booking.car.slug}) }}">
+                                    <button class="btn btn-info">Voir le vehicule</button>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="alert alert-success">
+                                    <strong>Information du demandeur</strong>
+                                    <ul style="list-style: none">
+                                        <li><strong>Email:</strong> {{ booking.email }}</li>
+                                        <li><strong>Nom:</strong> {{ booking.lastname }}</li>
+                                        <li><strong>Prénom:</strong> {{ booking.firstname }}</li>
+                                        <li><strong>Civilité:</strong> {{ booking.civility }}</li>
+                                        <li><strong>Téléphone:</strong> {{ booking.phone }}</li>
+                                        <li><strong>Pays:</strong> {{ booking.country }}</li>
+                                        <li><strong>Ville:</strong> {{ booking.city }}</li>
+                                        <li><strong>Adresse:</strong> {{ booking.address }}</li>
+                                    </ul>
+                                </div>
+                                <br>
+                                <div class="alert alert-warning">
+                                    <strong>Information du véhucule</strong>
+                                    <ul style="list-style: none">
+                                        <li><strong>Marque:</strong> {{ booking.car.marques.marque }}</li>
+                                        <li><strong>Model:</strong> {{ booking.car.model }}</li>
+                                        <li><strong>Version:</strong> {{ booking.car.version }}</li>
+                                        <li><strong>Prix:</strong> {{ booking.car.prix }}</li>
+                                        <li><strong>Année:</strong> {{ booking.car.annee }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="alert alert-info">
+                                    <strong>Les détails de la demande</strong>
+                                    <p><strong>Objet:</strong> {{ booking.demande }}</p>
+                                    <p><strong>Message:</strong> <br> {{ booking.message }}</p>
+                                </div>
+                                <div class="alert alert-dark">
+                                    <strong>Traiter la demande</strong>
+                                    <p>
+                                        {% if booking.statut == 'En cours de création' %}
+                                            <a href="{{ path('booking_traitement', {id : booking.id}) }}"><button class="btn btn-success">Mettre le sujet en cours de traitement</button></a>
+                                        {% elseif booking.statut == 'En cours de traitement' %}
+                                            <a href="{{ path('booking_close', {id : booking.id}) }}"><button class="btn btn-success">Marque comme traiter</button></a>
+                                        {% else %}
+                                            <a href=""><button class="btn btn-dark">Demande traité</button></a>
+                                        {% endif %}
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    {% endblock %}
+
+    {% block footer %}
+    {% include 'partials/admin.footer.html.twig' %}
+{% endblock %}
